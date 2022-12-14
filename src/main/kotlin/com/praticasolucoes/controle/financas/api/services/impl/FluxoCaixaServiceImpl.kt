@@ -28,12 +28,10 @@ class FluxoCaixaServiceImpl(@Autowired var movimBankService: MovementBankService
         val dateFormatter = DateTimeFormatter.ofPattern("dd/MM")
         val locale = Locale.getDefault()
         val numberFormat = NumberFormat.getCurrencyInstance(locale)
-
+        headers.add("estrutura")
+        headers.add("Descrição")
         for (i in 0..qtdDias.toLong()) {
-            if (i.equals(0)) {
-                headers.add("estrutura")
-                headers.add("Descrição")
-            }
+
             headers.add(dateFormatter.format(localDate.plusDays(i)))
         }
         dt.headers=headers;
@@ -65,7 +63,6 @@ class FluxoCaixaServiceImpl(@Autowired var movimBankService: MovementBankService
                     lines.add(columns)
                 }
         dt.lines=lines
-
         return dt
     }
 
